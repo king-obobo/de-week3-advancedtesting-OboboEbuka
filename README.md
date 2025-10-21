@@ -1,0 +1,1 @@
+The task here task is to develop a pipeline and to ensure the pipeline is bulletproof through testing. I would be writing unit tests, using fixtures, and simulating edge cases to verify that every transformation, validation, and calculation is correct. 
