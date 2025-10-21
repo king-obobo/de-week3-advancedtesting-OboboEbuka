@@ -1,0 +1,1 @@
+# Writes results to shoplink_cleaned.json.
