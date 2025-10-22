@@ -62,5 +62,7 @@ def test_valid_json(temp_json_file):
     reader = ReadJson(str(temp_json_file))
     result = reader.read_json_file()
     
+    # Checks it returns a list of dictionaries
     assert isinstance(result, list)
+    # checks the first Item
     assert result[0]["order_id"] == "ORD001"

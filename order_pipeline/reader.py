@@ -12,11 +12,13 @@ class ReadJson:
         self.file_path = file_path
 
 
-    def open_json_file(self) -> json:
+    # Opens the json file and returns the json
+    def _open_json_file(self) -> json:
         with open(self.file_path, "r") as f:
             return json.load(f)
-    
-    def validate_path_and_size(self) -> None: 
+
+
+    def _validate_path_and_size(self) -> None: 
         # Check if file is a json file
         if not self.file_path.endswith(".json"):
             raise ValueError("File is not a JSON file")
@@ -35,9 +37,9 @@ class ReadJson:
         
     def read_json_file(self) -> list[dict]:
 
-        self.validate_path_and_size()
+        self._validate_path_and_size()
         try:
-            data = self.open_json_file()
+            data = self._open_json_file()
                 
             if not data:
                 raise ValueError("File is Empty")
@@ -52,5 +54,3 @@ class ReadJson:
         
 
 # print(Path.cwd())
-reader = ReadJson("./shoplink.json")
-print(reader.read_json_file())
