@@ -1,11 +1,9 @@
 # Runs all steps
 
-import json
-from pathlib import Path
 from reader import ReadJson
 from validator import Validator
 
-reader = ReadJson("../shoplink.json")
+reader = ReadJson("shoplink.json") # C:\Users\DELL\Desktop\Data-Epic\Advanced-Testing-Week3\shoplink.json #shoplink.json
 my_file = reader.read_json_file()
 
 validator = Validator(my_file)
