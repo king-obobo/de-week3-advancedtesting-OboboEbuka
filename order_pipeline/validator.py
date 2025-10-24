@@ -15,7 +15,7 @@ class Validator:
     def _validate_row(self, row:dict) -> dict | None:
         
         #I would be dropping the row if any of the values are missing
-        if any(row.get(k) in (None, "", "N/A") for k in self.expected_keys if k in row):
+        if any(row.get(k) in (None, "", "N/A", "N/a", "n/a") for k in self.expected_keys if k in row):
             self.skipped_rows.append({
                 "row": row,
                 "Reason": "Missing or empty required text field (s)"
