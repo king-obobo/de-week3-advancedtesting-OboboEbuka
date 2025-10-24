@@ -4,25 +4,35 @@ from reader import ReadJson
 from validator import Validator
 from transformer import Transformer
 from analyzer import Analyzer
+from exporter import Exporter
 
-my_file = ReadJson("shoplink.json").read_json_file()
-validated_file = Validator(my_file).validate_file()
-transformed_data = Transformer(validated_file).transform_data()
-# print(type(validated_file))
-# for row in validated_file:
-#     print(row)
-    
-# print("\nSKIPPED ROWS")
-# for row in validator.skipped_rows:
-#     print(row)
 
-# for row in transformed_data:
-#     print(row)
+if __name__ == "__main__":
 
-my_analyzer = Analyzer(transformed_data)
-total_revenue = my_analyzer.compute_total_revenue()
-print(total_revenue)
-average_revenue = my_analyzer.compute_average_revenue()
-print(average_revenue)
-payment_status = my_analyzer.compute_payment_status()
-print(payment_status)
+    my_file = ReadJson("shoplink.json").read_json_file()
+    validator = Validator(my_file)
+    validated_file = validator.validate_file()
+    transformed_data = Transformer(validated_file).transform_data()
+    # print(type(validated_file))
+    for row in validated_file:
+        print(row)
+        
+    print("\nSKIPPED ROWS")
+    for row in validator.skipped_rows:
+        print(row)
+
+    print("\nVALIDATED DATA")
+    for row in transformed_data:
+        print(row)
+
+    my_analyzer = Analyzer(transformed_data)
+    total_revenue = my_analyzer.compute_total_revenue()
+    print(f"\nThe Total Revenue generated is ${total_revenue}")
+    average_revenue = my_analyzer.compute_average_revenue()
+    print(f"The Average Revenue generated is ${average_revenue}\n")
+    payment_status = my_analyzer.compute_payment_status()
+    print(f"Total Paid payment status: {payment_status['paid']}")
+    print(f"Total Pending payment status: {payment_status['pending']}")
+    print(f"Total Refunded payment status: {payment_status['refunded']}")
+
+    # Exporter(transformed_data).export_to_json()
