@@ -17,6 +17,7 @@ class Analyzer:
             all_totals.append(row["total"])
         
         return sum(all_totals), len(all_totals)
+
     
     def compute_total_revenue(self):
         total_revenue, _ = self.compute_revenue_vals()

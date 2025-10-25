@@ -3,7 +3,6 @@
 # Cleans text fields (trim spaces, fix casing).
 # Recalculates total = quantity * price for consistency.
 
-import json
 import re
 
 class Transformer:
@@ -16,19 +15,23 @@ class Transformer:
         self.json_file = json_file
         
         
-    def extract_digits(self, val: str|float|int) -> None:
+    def _extract_digits(self, val: str|float|int) -> None:
         if isinstance(val, (int, float)):
             return abs(float(val))
         
         if isinstance(val, str):
-            match = re.search(r'[\d.]+', val)
+            match = re.search(r'[\d.,]+', val)
             if match:
-                return abs(float(match.group()))
+                cleaned = match.group().replace(",", "")
+                try:
+                    return abs(float(cleaned))
+                except ValueError:
+                    return 0.0
                 
         return 0.0
         
         
-    def transform_string_fields(self, row):
+    def _transform_string_fields(self, row):
         # Cleans text fields (trim spaces, fix casing).
         for field in Transformer.REQUIRED_STRING_FIELDS:
             if field in row and isinstance(row[field], str):
@@ -36,27 +39,30 @@ class Transformer:
         return row
         
     
-    def transform_numeric_fields(self, row):
+    def _transform_numeric_fields(self, row):
         # Converts quantity, price, and total to numeric values.
         for field in Transformer.REQUIRED_NUMERICAL_FIELDS:
             if field in row:
-                row[field] = self.extract_digits(row[field])
+                row[field] = self._extract_digits(row[field])
+            else:
+                row[field] = 0.0
         return row
     
     
-    def recalculate_total(self, row: dict):
+    def _recalculate_total(self, row: dict):
+        # Recalculates total = quantity * price for consistency.
         if "quantity" in row and "price" in row:
             row["total"] = round(row['price'] * row['quantity'], 2)
-        # Recalculates total = quantity * price for consistency.
+        
         return row
     
     
     def transform_data(self):
         transformed_data = []
         for row in self.json_file:
-            row = self.transform_string_fields(row)
-            row = self.transform_numeric_fields(row)
-            row = self.recalculate_total(row)
+            row = self._transform_string_fields(row)
+            row = self._transform_numeric_fields(row)
+            row = self._recalculate_total(row)
             transformed_data.append(row)
             
         return transformed_data

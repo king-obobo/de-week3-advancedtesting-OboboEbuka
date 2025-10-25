@@ -5,6 +5,7 @@ from validator import Validator
 from transformer import Transformer
 from analyzer import Analyzer
 from exporter import Exporter
+from datetime import datetime
 
 
 if __name__ == "__main__":
@@ -30,9 +31,19 @@ if __name__ == "__main__":
     print(f"\nThe Total Revenue generated is ${total_revenue}")
     average_revenue = my_analyzer.compute_average_revenue()
     print(f"The Average Revenue generated is ${average_revenue}\n")
+    
+    print("\n====================SUMMARY STATISTICS FOR PAYMENT STATUS=========================")
     payment_status = my_analyzer.compute_payment_status()
     print(f"Total Paid payment status: {payment_status['paid']}")
     print(f"Total Pending payment status: {payment_status['pending']}")
     print(f"Total Refunded payment status: {payment_status['refunded']}")
+    print("\n====================END OF SUMMARY STATISTICS FOR PAYMENT STATUS=========================\n")
+    
+    # bad_data = [
+    #     {"not_ok": {1, 2, 3}},           # set
+    #     {"not_ok": datetime.now()},      # datetime
+    #     {"not_ok": b"bytes"}]           # bytes
+    # test_data = [123]
+    # Exporter(bad_data).export_to_json()
 
-    # Exporter(transformed_data).export_to_json()
+    Exporter(transformed_data).export_to_json()
