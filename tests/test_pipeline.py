@@ -1,0 +1,1 @@
+from order_pipeline.pipeline import Pipeline
