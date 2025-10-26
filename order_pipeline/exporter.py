@@ -3,7 +3,7 @@ import json
 import os
 
 class Exporter:
-    def __init__(self, file: list, output_path:str = "cleaned_shoplink.json") -> str:
+    def __init__(self, file: list, output_path:str = "JSON Files\cleaned_shoplink.json") -> str:
         self.file = file
         self.output_path = output_path
         
