@@ -1,10 +1,10 @@
 # Runs all steps
 
-from reader import ReadJson
-from validator import Validator
-from transformer import Transformer
-from analyzer import Analyzer
-from exporter import Exporter
+from .reader import ReadJson
+from .validator import Validator
+from .transformer import Transformer
+from .analyzer import Analyzer
+from .exporter import Exporter
 from datetime import datetime
 
 

@@ -1,7 +1,8 @@
-from pipeline import Pipeline
+from order_pipeline.pipeline import Pipeline
 
 
 if __name__ == "__main__":
+    
     pipeline = Pipeline("shoplink.json")
     pipeline.run()
     pipeline.print_summary_statistics()
