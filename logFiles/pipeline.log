@@ -1,0 +1,54 @@
+2025-10-28 22:57:57,560 - order_pipeline.exporter - ERROR - Serialization error Object of type set is not JSON serializable
+2025-10-28 22:57:57,670 - order_pipeline.reader - ERROR - File is not a JSON File
+2025-10-28 22:57:57,672 - order_pipeline.reader - ERROR - File is not a JSON File
+2025-10-28 22:57:57,672 - order_pipeline.reader - ERROR - File is not a JSON File
+2025-10-28 22:57:57,680 - order_pipeline.reader - ERROR - File not Found
+2025-10-28 22:57:57,688 - order_pipeline.reader - ERROR - File is Empty
+2025-10-28 22:57:57,709 - order_pipeline.reader - ERROR - Invalid JSON format
+Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\Data-Epic\Advanced-Testing-Week3\order_pipeline\reader.py", line 73, in read_json_file
+    data = self._open_json_file()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Data-Epic\Advanced-Testing-Week3\order_pipeline\reader.py", line 27, in _open_json_file
+    return json.load(f)
+           ^^^^^^^^^^^^
+  File "C:\Users\DELL\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\AppData\Local\Programs\Python\Python311\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\AppData\Local\Programs\Python\Python311\Lib\json\decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ^^^^^^^^^^^^^^^^^^^^^^
+json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+2025-10-28 23:00:30,879 - order_pipeline.exporter - ERROR - Serialization error Object of type set is not JSON serializable
+2025-10-28 23:00:30,899 - order_pipeline.reader - ERROR - File is not a JSON File
+2025-10-28 23:00:30,906 - order_pipeline.reader - ERROR - File is not a JSON File
+2025-10-28 23:00:30,912 - order_pipeline.reader - ERROR - File is not a JSON File
+2025-10-28 23:00:30,912 - order_pipeline.reader - ERROR - File not Found
+2025-10-28 23:00:30,912 - order_pipeline.reader - ERROR - File is Empty
+2025-10-28 23:00:30,937 - order_pipeline.reader - ERROR - Invalid JSON format
+Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\Data-Epic\Advanced-Testing-Week3\order_pipeline\reader.py", line 73, in read_json_file
+    data = self._open_json_file()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Data-Epic\Advanced-Testing-Week3\order_pipeline\reader.py", line 27, in _open_json_file
+    return json.load(f)
+           ^^^^^^^^^^^^
+  File "C:\Users\DELL\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\AppData\Local\Programs\Python\Python311\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\AppData\Local\Programs\Python\Python311\Lib\json\decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ^^^^^^^^^^^^^^^^^^^^^^
+json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
