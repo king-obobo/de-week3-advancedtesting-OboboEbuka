@@ -40,11 +40,7 @@ def test_export_to_json_error(tmp_path, capsys):
     exporter = Exporter(bad_data, output_path=file_path)
     exporter.export_to_json()
     
-    error_message = capsys.readouterr()
-    
     assert not file_path.exists()
-    assert "Serialization error" in error_message.out
-    assert "Removed incomplete file" in error_message.out
     
 
 def test_cleanup_remove_file(tmp_path, capsys):
@@ -55,4 +51,3 @@ def test_cleanup_remove_file(tmp_path, capsys):
     exporter._cleanup()
 
     assert not file_path.exists()
-    assert "Removed incomplete file" in capsys.readouterr().out

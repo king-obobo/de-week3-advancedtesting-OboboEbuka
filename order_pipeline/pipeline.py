@@ -5,38 +5,28 @@ from .validator import Validator
 from .transformer import Transformer
 from .analyzer import Analyzer
 from .exporter import Exporter
-from datetime import datetime
-import logging
+# from datetime import datetime
+# import logging
+from .logging_config import setup_logger
 
-pipeline_logger = logging.getLogger(__name__)
-pipeline_logger.setLevel(logging.INFO)
+# Setting up my Logger
+pipeline_logger = setup_logger(__name__)
 
-# Setting up my handlers
-pipeline_file_handler = logging.FileHandler('logFiles\pipeline_files.logs', mode="w")
-pipeline_stream_handler = logging.StreamHandler()
-pipeline_logger.propagate = False
-
-# Setting levels for the handlers
-pipeline_file_handler.setLevel(logging.WARNING)
-# pipeline_stream_handler.setLevel(logging.INFO)
-
-# Setting Format for my logger
-formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-pipeline_file_handler.setFormatter(formatter)
-pipeline_stream_handler.setFormatter(formatter)
-
-# Adding my handlers to my logger
-pipeline_logger.addHandler(pipeline_file_handler)
-pipeline_logger.addHandler(pipeline_stream_handler)
 
 
 class Pipeline:
+    """
+    A simple Pipeline class to orchestrate my workflow
+    """
     
     def __init__(self, json_file):
         self.json_file = json_file
         
         
-    def run(self):
+    def run(self) -> None:
+        """
+        Orchestrates the Pipeline
+        """
         # Read In the File
         READER = ReadJson(self.json_file)
         try:
@@ -69,7 +59,12 @@ class Pipeline:
         
         
     def print_summary_statistics(self) -> None:
-        
+        """
+        Simply prints out the summary statistics
+
+        Returns:
+            None
+        """
         # Prints the total Revenue
         print(f"\nThe Total Revenue generated is ${self.ANALYZER.compute_total_revenue()}")
         

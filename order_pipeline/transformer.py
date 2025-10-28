@@ -4,8 +4,15 @@
 # Recalculates total = quantity * price for consistency.
 
 import re
+from .logging_config import setup_logger
+
+# Setting up my logger
+trans_logger = setup_logger(__name__)
 
 class Transformer:
+    """
+    A transformer class that ensures the numeric fields [quantity, price and total] are infact numeric
+    """
     # ["order_id", "timestamp", "item", "payment_status", "quantity", "price", "total"]
     REQUIRED_STRING_FIELDS = ["order_id", "item", "payment_status"]
     REQUIRED_NUMERICAL_FIELDS = ["quantity", "price", "total"]
@@ -15,7 +22,16 @@ class Transformer:
         self.json_file = json_file
         
         
-    def _extract_digits(self, val: str|float|int) -> None:
+    def _extract_digits(self, val: str|float|int) -> float:
+        """
+        Uses regex to extract the digits from a string and returns it as a float. This is specific to columns that are expected to be numeric
+
+        Args:
+            val (str | float | int): A non empty string containg some digits
+
+        Returns:
+            float: The cleaned data point
+        """
         if isinstance(val, (int, float)):
             return abs(float(val))
         
@@ -26,12 +42,22 @@ class Transformer:
                 try:
                     return abs(float(cleaned))
                 except ValueError:
+                    trans_logger.error("Data could not be converted into a float, replacing with Zero...")
                     return 0.0
                 
         return 0.0
         
         
-    def _transform_string_fields(self, row):
+    def _transform_string_fields(self, row:dict):
+        """
+        Cleans us the fields that are expected to be stringd
+
+        Args:
+            row (dict): a dictionary representing the row
+
+        Returns:
+            row
+        """
         # Cleans text fields (trim spaces, fix casing).
         for field in Transformer.REQUIRED_STRING_FIELDS:
             if field in row and isinstance(row[field], str):
